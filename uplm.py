@@ -2,6 +2,18 @@
 # -*- coding: utf-8 -*-
 
 import sys
+import os
+
+allowedExt = [".mp3"]
+
+def getMusicFileIter(allowedExt):
+    def iterFunc(dir):
+        for r, dirs, files in os.walk(dir):
+            for f in files:
+                if os.path.splitext(f)[1] in allowedExt:
+                    yield os.path.abspath(f)
+    return iterFunc
+
 
 def usage():
     s = ("Usage: {} <folder> <file>\n"
@@ -10,6 +22,10 @@ def usage():
     print s.format(sys.argv[0])
 
 if __name__ == '__main__':
-    if len(sys.argv) < 3:
+    if len(sys.argv) < 2:
         usage()
         sys.exit(1)
+
+    iterMusicFiles = getMusicFileIter(allowedExt)
+    for f in iterMusicFiles(sys.argv[1]):
+        print f
