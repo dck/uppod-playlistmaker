@@ -14,7 +14,8 @@ def getMusicFileIter(allowedExt):
         for r, dirs, files in os.walk(dir):
             for f in files:
                 if os.path.splitext(f)[1] in allowedExt:
-                    yield (f, os.path.abspath(f))
+                    fileName = os.path.join(r, f)
+                    yield (f, os.path.abspath(fileName))
     return iterFunc
 
 
