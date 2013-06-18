@@ -25,7 +25,7 @@ def usage():
     print(s.format(sys.argv[0]))
 
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 3:
         usage()
         sys.exit(1)
 
